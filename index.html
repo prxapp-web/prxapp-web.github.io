@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <title>PeptideRx</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#0a0a0f', 50: '#0f0f1a', 100: '#141425', 200: '#1a1a30' },
+            accent: { DEFAULT: '#3b82f6', dim: '#2563eb', glow: '#60a5fa' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- htm (JSX alternative) -->
+  <script src="https://unpkg.com/htm@3/dist/htm.js"></script>
+
+  <!-- Recharts -->
+  <script src="https://unpkg.com/prop-types@15/prop-types.min.js"></script>
+  <script src="https://unpkg.com/recharts@2/umd/Recharts.js"></script>
+
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { height: 100%; margin: 0; padding: 0; background: #0a0a0f; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; overflow: hidden; }
+    body { height: 100%; margin: 0; padding: 0; background: #0a0a0f; overflow: hidden; position: fixed; width: 100%; }
+    #root { height: 100%; overflow: hidden; }
+    ::-webkit-scrollbar { width: 0; height: 0; }
+    input, select, textarea { font-family: inherit; font-size: 16px; }
+    .glass { background: rgba(15,15,26,0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(51,65,85,0.3); }
+    .tab-enter { animation: tabIn 0.25s ease-out; }
+    @keyframes tabIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.4); } 50% { box-shadow: 0 0 12px 4px rgba(59,130,246,0.15); } }
+    .glow-pulse { animation: pulse-glow 2s infinite; }
+    @keyframes check-pop { 0% { transform: scale(0.8); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    .check-pop { animation: check-pop 0.3s ease-out; }
+    @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .slide-up { animation: slide-up 0.3s ease-out; }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    .fade-in { animation: fade-in 0.2s ease-out; }
+    .safe-top { padding-top: env(safe-area-inset-top, 0px); }
+    .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+    input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+    @supports (-webkit-touch-callout: none) {
+      .modal-scroll { -webkit-overflow-scrolling: touch; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="src/peptide-data.js"></script>
+  <script src="src/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+</body>
+</html>

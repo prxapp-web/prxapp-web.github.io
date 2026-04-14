@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="c512" width="512" height="512"></canvas>
+<canvas id="c192" width="192" height="192"></canvas>
+<script>
+function drawIcon(canvas) {
+  var s = canvas.width;
+  var ctx = canvas.getContext('2d');
+  // Background
+  ctx.fillStyle = '#0a0a0f';
+  ctx.beginPath();
+  ctx.roundRect(0, 0, s, s, s * 0.2);
+  ctx.fill();
+  // Accent circle
+  ctx.fillStyle = '#3b82f6';
+  ctx.globalAlpha = 0.15;
+  ctx.beginPath();
+  ctx.arc(s * 0.5, s * 0.45, s * 0.32, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+  // Syringe icon
+  ctx.strokeStyle = '#3b82f6';
+  ctx.lineWidth = s * 0.04;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  // Barrel
+  var bx = s * 0.32, by = s * 0.25, bw = s * 0.36, bh = s * 0.35;
+  ctx.beginPath();
+  ctx.roundRect(bx, by, bw, bh, s * 0.03);
+  ctx.stroke();
+  // Plunger
+  ctx.beginPath();
+  ctx.moveTo(s * 0.42, by);
+  ctx.lineTo(s * 0.42, by - s * 0.08);
+  ctx.lineTo(s * 0.58, by - s * 0.08);
+  ctx.lineTo(s * 0.58, by);
+  ctx.stroke();
+  // Needle
+  ctx.beginPath();
+  ctx.moveTo(s * 0.5, by + bh);
+  ctx.lineTo(s * 0.5, by + bh + s * 0.18);
+  ctx.stroke();
+  // Dose lines
+  ctx.lineWidth = s * 0.02;
+  ctx.globalAlpha = 0.5;
+  for (var i = 1; i <= 3; i++) {
+    var y = by + (bh / 4) * i;
+    ctx.beginPath();
+    ctx.moveTo(bx + s * 0.04, y);
+    ctx.lineTo(bx + s * 0.12, y);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  // Text
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold ' + (s * 0.1) + 'px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('PeptideRx', s * 0.5, s * 0.88);
+}
+drawIcon(document.getElementById('c512'));
+drawIcon(document.getElementById('c192'));
+// Download links
+document.getElementById('c512').toBlob(function(b) {
+  var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'icon-512.png'; a.click();
+});
+document.getElementById('c192').toBlob(function(b) {
+  var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'icon-192.png'; a.click();
+});
+</script>
+</body>
+</html>
