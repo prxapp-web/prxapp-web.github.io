@@ -1,10 +1,11 @@
-var CACHE_NAME = 'peptiderx-v1';
+var CACHE_NAME = 'peptiderx-v2';
+var BASE = '/prx-app';
 var ASSETS = [
-  '/',
-  '/index.html',
-  '/src/peptide-data.js',
-  '/src/app.js',
-  '/manifest.json'
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/src/peptide-data.js',
+  BASE + '/src/app.js',
+  BASE + '/manifest.json'
 ];
 
 self.addEventListener('install', function(e) {
